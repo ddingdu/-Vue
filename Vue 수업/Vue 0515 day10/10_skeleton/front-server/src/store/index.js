@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 import axios from 'axios'
 
+import router from '../router'
+
 const API_URL = 'http://127.0.0.1:8000'
 
 Vue.use(Vuex)
@@ -18,6 +20,11 @@ export default new Vuex.Store({
   mutations: {
     GET_ARTICLES(state, articles) {
       state.articles = articles
+    },
+    // signup & login -> 완료하면 바로 
+    SAVE_TOKEN(state, token) {
+      state.token = token
+      router.push({ name: 'ArticleView' }) // store/index.js $router 접근 불가,, why?
     }
   },
   actions: {

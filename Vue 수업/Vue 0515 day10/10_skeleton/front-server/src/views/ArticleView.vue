@@ -16,13 +16,23 @@ export default {
     ArticleList,
   },
   computed:{
+    isLogin() {
+      return this.$store.getters.isLogin  // 로그인 여부를 알려줌
+    }
+
   },
   created() {
     this.getArticles()
   },
   methods: {
     getArticles() {
-      this.$store.dispatch('getArticles')
+
+      if (this.isLogin) {
+        this.$store.dispatch('getArticles')
+      } else {
+        alert('로그인 필요한 페이지 입니다.')
+        this.$router.push({ name: 'LogInView'})
+      }
     }
   }
 }
